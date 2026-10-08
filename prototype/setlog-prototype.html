@@ -161,12 +161,12 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 /* ---------- room timeline ---------- */
 .rhead{display:flex;align-items:center;gap:12px;padding:18px 20px 6px}
 .rhead h1{flex:1;margin:0;font-size:26px;font-weight:800;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dots{display:flex}
+.dots{display:flex;cursor:pointer}
 .dot{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#000}
 .dots .dot:first-child{margin-left:0}
 .rmeta{display:flex;gap:10px;padding:8px 20px 14px;flex-wrap:wrap}
 .chip{background:var(--surface);border-radius:6px;padding:8px 14px;font-size:15px;display:flex;align-items:center;gap:8px}
-.chip.pink{background:var(--yellow);color:var(--on-accent);font-weight:700}
+.chip.pink{background:var(--yellow);color:var(--on-accent);font-weight:700;border-radius:999px}
 .chip.code{font-weight:700;letter-spacing:2px;color:var(--blue-ink)}
 .slots{padding:4px 20px 150px;display:flex;flex-direction:column;gap:6px}
 .slot{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--rule)}
@@ -192,31 +192,28 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 .tcard .tl{position:absolute;left:8px;right:8px;bottom:8px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
 .tcard .tl b{display:block;font-size:15px;font-family:var(--display)}
 .tcard .tl span{font-size:12px}
-/* ---------- player, a horizontal strip of everyone's clips ---------- */
-#s-player{background:#000;z-index:50}
-.pbox{position:absolute;inset:0;background:#000;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+/* ---------- today's log, every video side by side ---------- */
+#s-player{background:var(--bg);z-index:50}
+.pbox{position:absolute;inset:0;display:flex;align-items:center;gap:12px;overflow-x:auto;overflow-y:hidden;padding:0 16px;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .pbox::-webkit-scrollbar{display:none}
-.slide{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;background:#000}
+.slide{position:relative;flex:0 0 232px;height:412px;border-radius:12px;overflow:hidden;background:#000;scroll-snap-align:center;cursor:pointer}
 .slide video,.slide canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .slide video.mirror{transform:scaleX(-1)}
-.slide .so{position:absolute;left:20px;right:20px;bottom:140px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.slide .so .ph{font-family:var(--display);font-weight:700;font-size:40px;line-height:1}
-.slide .so .pn{font-size:20px;font-weight:700;margin-top:4px}
-.slide .so .pc{font-size:18px;color:#ddd;margin-top:6px}
-.slide .who{position:absolute;left:20px;top:calc(40px + env(safe-area-inset-top,0px));display:flex;align-items:center;gap:8px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.7);font-weight:700}
-.parrow{position:absolute;top:50%;z-index:3;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:rgba(20,20,22,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700}
-.parrow.l{left:10px}.parrow.r{right:10px}
-.parrow[disabled]{opacity:.25}
-.phint{position:absolute;left:0;right:0;top:calc(64px + env(safe-area-inset-top,0px));text-align:center;color:#fff;font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;z-index:2;pointer-events:none}
-.segs{position:absolute;left:14px;right:14px;top:calc(14px + env(safe-area-inset-top,0px));display:flex;gap:4px;z-index:2}
-.segs i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}
-.segs i b{display:block;height:100%;width:0;background:#fff}
-.segs i.done b{width:100%}
+.slide .so{position:absolute;left:12px;right:12px;bottom:12px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.slide .so .ph{font-family:var(--display);font-weight:700;font-size:24px;line-height:1}
+.slide .so .pn{font-size:14px;font-weight:700;margin-top:4px}
+.slide .so .pc{font-size:13px;color:#ddd;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slide .who{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.7);font-weight:700;font-size:13px}
+.slide .who .dot{width:22px;height:22px;font-size:11px;border:0}
+.slide .snd{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;background:rgba(20,20,22,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
+.slide.sound{outline:3px solid var(--yellow);outline-offset:-3px}
+.ptitle{position:absolute;left:20px;right:80px;top:calc(34px + env(safe-area-inset-top,0px));z-index:3}
+.ptitle b{display:block;font-size:22px}
+.ptitle span{display:block;color:var(--muted);font-size:14px;margin-top:2px}
 .pclose{position:absolute;right:16px;top:calc(34px + env(safe-area-inset-top,0px));z-index:3}
 .pacts{position:absolute;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom,0px));z-index:3;display:flex;justify-content:center;gap:12px;padding:0 16px;flex-wrap:wrap}
-.pacts button{background:rgba(44,44,46,.9);padding:12px 22px;border-radius:999px;font-size:16px;font-weight:600}
+.pacts button{background:var(--surface2);color:var(--fg);padding:12px 22px;border-radius:999px;font-size:16px;font-weight:600}
 .pacts button.pink{background:var(--yellow);color:var(--on-accent)}
-
 /* ---------- account ---------- */
 .acc{padding:16px 24px 150px}
 .acc h1{text-align:center;font-size:28px;margin:8px 0 26px;position:relative}
@@ -376,13 +373,10 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 
 <!-- ============ PLAYER ============ -->
 <section class="screen" id="s-player">
+  <div class="ptitle"><b id="p-title">today's log</b><span id="p-sub">tap a video for sound</span></div>
   <div class="pbox" id="pbox"></div>
-  <div class="segs" id="segs"></div>
-  <div class="phint" id="phint">swipe for the next clip</div>
   <button class="iconbtn pclose" id="p-close" aria-label="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <button class="parrow l" id="p-prev" aria-label="previous clip">&#8249;</button>
-  <button class="parrow r" id="p-next" aria-label="next clip">&#8250;</button>
-  <div class="pacts"><button id="p-export" class="pink">export today's log</button><button id="p-replay">replay</button></div>
+  <div class="pacts"><button id="p-export" class="pink">export today's log</button></div>
 </section>
 
 <!-- shared bottom bar for home -->
@@ -503,11 +497,12 @@ function demoThumb(member, hour, seed){
   drawDemoFrame(g, c.width, c.height, member, hour, seed, 0);
   const url = c.toDataURL('image/jpeg', .7); thumbCache.set(key,url); return url;
 }
-function drawDemoFrame(g, w, h, member, hour, seed, t){
+function drawDemoFrame(g, w, h, member, hour, seed, t, label=true){
   let s = (seed*9301 + hour*49297) % 233280; const rnd = () => (s = (s*9301+49297)%233280)/233280;
   const grad = g.createLinearGradient(0,0,w,h); grad.addColorStop(0, member.color); grad.addColorStop(1, '#0a0a0a');
   g.fillStyle = grad; g.fillRect(0,0,w,h);
   for(let i=0;i<7;i++){ const r = (0.08+rnd()*0.22)*w; const x = rnd()*w + Math.sin(t*1.3+i)*w*0.04; const y = rnd()*h + Math.cos(t*0.9+i)*h*0.03; g.beginPath(); g.arc(x,y,r,0,Math.PI*2); g.fillStyle = `rgba(255,255,255,${0.05+rnd()*0.12})`; g.fill(); }
+  if(!label) return;
   g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(0,h*0.78,w,h*0.22);
   g.fillStyle = '#fff'; g.font = `bold ${Math.round(w*0.11)}px ${getComputedStyle(document.body).fontFamily}`; g.textBaseline='middle';
   g.fillText(member.name, w*0.08, h*0.89);
@@ -648,9 +643,10 @@ function renderRoom(){
   const members = [me(), ...room.members];
   $('#room-dots').innerHTML = members.map(m => `<span class="dot" style="background:${m.color}" title="${esc(m.name)}">${initial(m.name)}</span>`).join('');
   const clips = roomClipsToday(room);
-  $('#room-meta').innerHTML = `<button class="chip pink" id="rm-watch">▶ watch today's log</button><button class="chip code" id="rm-code">${room.code}</button><span class="chip">${clips.length} clip${clips.length===1?'':'s'} today</span>`;
+  $('#room-meta').innerHTML = `<button class="chip pink" id="rm-watch">▶ watch today's log</button>`;
   $('#rm-watch').addEventListener('click', () => openPlayer(room.id));
-  $('#rm-code').addEventListener('click', () => { $('#code-title').textContent='invite code'; $('#code-txt').textContent=room.code; openSheet('code'); });
+  $('#room-dots').title = 'invite code ' + room.code;
+  $('#room-dots').onclick = () => { $('#code-title').textContent='invite code'; $('#code-txt').textContent=room.code; openSheet('code'); };
   const body = $('#room-body');
   const strip = clips.length ? `<div class="today"><p class="eyebrow">today's log</p><div class="row">${clips.map((c,i) => { const m = memberById(room,c.memberId); const src = clipThumb(c,room); return `<button class="tcard" data-i="${i}" aria-label="${esc(m.name)} at ${timeLabel(c.capturedAt)}" style="background:${m.color}">${src?`<img alt="" src="${src}">`:''}<div class="tl"><b>${hourLabel(c.slotHour)}</b><span>${esc(m.isMe?'you':m.name)}</span></div></button>`; }).join('')}</div></div>` : '';
   if(room.type==='stack'){
@@ -780,8 +776,8 @@ function renderNotifs(){
 function ago(t){ const m = Math.round((Date.now()-t)/60000); if(m<1) return 'just now'; if(m<60) return m+'m ago'; const h = Math.round(m/60); if(h<24) return h+'h ago'; return Math.round(h/24)+'d ago'; }
 function renderZip(){ const friends = []; S.rooms.forEach(r => r.members.forEach(m => { if(!friends.find(f=>f.id===m.id)) friends.push(m); })); $('#zip-friends').innerHTML = friends.length ? friends.map(f => `<button class="outline" style="margin-bottom:10px;display:flex;align-items:center;gap:12px;justify-content:flex-start;padding-left:18px"><span class="dot" style="background:${f.color};margin:0">${initial(f.name)}</span>${esc(f.name)}</button>`).join('') : `<p class="note">no friends in your rooms yet.</p>`; $$('#zip-friends button').forEach(b => b.addEventListener('click', () => toast('zip is planned for v1'))); }
 
-/* ===================== player, horizontal strip ===================== */
-let P = {items:[], cur:-1, roomId:null, timer:0, raf:0, playing:true, prev:null, scrollT:0};
+/* ===================== today's log, every video side by side ===================== */
+let P = {items:[], roomId:null, raf:0, prev:null, sound:-1};
 const pbox = $('#pbox');
 async function buildItems(roomId){
   const room = S.rooms.find(r=>r.id===roomId); const clips = roomClipsToday(room); const items = [];
@@ -791,51 +787,36 @@ async function buildItems(roomId){
 async function openPlayer(roomId, start=0){
   const items = await buildItems(roomId);
   if(!items.length){ toast('no clips in this room today yet'); return; }
-  P = {items, cur:-1, roomId, playing:true, timer:0, raf:0, prev:current, scrollT:0};
-  $('#segs').innerHTML = items.map(()=>'<i><b></b></i>').join('');
-  pbox.innerHTML = items.map((it,k) => `<div class="slide" data-k="${k}">${it.url ? `<video playsinline preload="auto" src="${it.url}"${it.mirror?' class="mirror"':''}></video>` : `<canvas width="540" height="960"></canvas>`}<div class="who"><span class="dot" style="background:${it.member.color};margin:0">${initial(it.member.name)}</span>${esc(it.name)}</div><div class="so"><div class="ph">${it.hour}</div><div class="pn">${esc(it.name)} · ${it.time}</div><div class="pc">${esc(it.caption||'')}</div></div></div>`).join('');
+  const room = S.rooms.find(r=>r.id===roomId);
+  P = {items, roomId, raf:0, prev:current, sound:-1};
+  $('#p-title').textContent = `today's log · ${room.name}`;
+  $('#p-sub').textContent = `${items.length} clip${items.length===1?'':'s'} · scroll sideways · tap a video for sound`;
+  pbox.innerHTML = items.map((it,k) => `<div class="slide" data-k="${k}" role="button" tabindex="0" aria-label="${esc(it.name)} at ${it.time}">${it.url ? `<video playsinline muted loop autoplay preload="auto" src="${it.url}"${it.mirror?' class="mirror"':''}></video>` : `<canvas width="270" height="480"></canvas>`}<div class="who"><span class="dot" style="background:${it.member.color};margin:0">${initial(it.member.name)}</span>${esc(it.name)}</div>${it.url?'<span class="snd" aria-hidden="true">×</span>':''}<div class="so"><div class="ph">${it.hour}</div><div class="pn">${esc(it.name)} · ${it.time}</div><div class="pc">${esc(it.caption||'')}</div></div></div>`).join('');
   $$('.screen').forEach(s => s.classList.remove('active')); $('#s-player').classList.add('active'); $('#home-bar').classList.add('hidden'); closeSheets();
   if(current==='camera') stopCamera(); current = 'player';
-  $('#phint').style.display = items.length>1 ? '' : 'none';
-  pbox.scrollLeft = start * pbox.clientWidth;
-  activate(start);
+  $$('.slide video', pbox).forEach(v => v.play().catch(()=>{}));
+  const target = pbox.children[start]; if(target) target.scrollIntoView({inline:'center', block:'nearest'});
+  cancelAnimationFrame(P.raf); const t0 = performance.now();
+  const loop = () => { if(current!=='player') return; const t = (performance.now()-t0)/1000; const left = pbox.scrollLeft - 300, right = pbox.scrollLeft + pbox.clientWidth + 300;
+    P.items.forEach((it,k) => { if(it.url) return; const sl = pbox.children[k]; if(!sl || sl.offsetLeft > right || sl.offsetLeft + sl.offsetWidth < left) return; drawDemoFrame(sl.firstChild.getContext('2d'), 270, 480, it.member, it.clip.slotHour, it.clip.seed, t, false); });
+    P.raf = requestAnimationFrame(loop); };
+  loop();
 }
-function slideAt(i){ return pbox.children[i]; }
-function activate(i){
-  if(i===P.cur) return;
-  cancelAnimationFrame(P.raf); clearTimeout(P.timer);
-  P.cur = i; const it = P.items[i]; const sl = slideAt(i); if(!it || !sl) return;
-  $$('#segs i').forEach((s,k) => { s.classList.toggle('done', k<i); $('b',s).style.width = k<i?'100%':'0'; });
-  $$('.slide video', pbox).forEach(v => { if(v.closest('.slide')!==sl) v.pause(); });
-  $('#p-prev').disabled = i===0; $('#p-next').disabled = i===P.items.length-1;
-  const seg = $$('#segs i b')[i];
-  if(it.url){
-    const v = $('video', sl); v.currentTime = 0; v.muted = false;
-    v.onended = () => advance(); v.onerror = () => advance();
-    v.play().catch(() => { v.muted = true; v.play().catch(()=>{}); });
-    const t0 = performance.now(); const tick = () => { const d = v.duration && isFinite(v.duration) ? v.duration*1000 : 2000; seg.style.width = Math.min(100,(performance.now()-t0)/d*100)+'%'; P.raf = requestAnimationFrame(tick); }; tick();
-    P.timer = setTimeout(() => { if(P.cur===i) advance(); }, 3500);
-  } else {
-    const g = $('canvas', sl).getContext('2d'); const t0 = performance.now();
-    const tick = () => { if(P.cur!==i) return; const p = (performance.now()-t0)/2000; drawDemoFrame(g, 540, 960, it.member, it.clip.slotHour, it.clip.seed, p*2); seg.style.width = Math.min(100,p*100)+'%'; if(p<1) P.raf = requestAnimationFrame(tick); else advance(); }; tick();
-  }
+function setSound(k){
+  $$('.slide', pbox).forEach((sl,i) => { const v = $('video', sl); const on = i===k && v; sl.classList.toggle('sound', !!on); if(v){ v.muted = !on; const b = $('.snd', sl); if(b) b.textContent = on ? '♪' : '×'; if(on) v.play().catch(()=>{}); } });
+  P.sound = k;
 }
-function advance(){ if(!P.playing) return; const n = P.cur+1; if(n>=P.items.length){ $$('#segs i').forEach(s=>s.classList.add('done')); P.playing=false; toast(`that was today. ${P.items.length} clip${P.items.length===1?'':'s'}.`); return; } scrollToIndex(n); }
-function scrollToIndex(n){ n = Math.max(0, Math.min(P.items.length-1, n)); P.playing = true; const target = n*pbox.clientWidth; pbox.scrollTo({left:target, behavior:'smooth'}); setTimeout(() => { if(Math.abs(pbox.scrollLeft - target) > 4) pbox.scrollLeft = target; activate(n); }, 350); }
-pbox.addEventListener('scroll', () => { clearTimeout(P.scrollT); P.scrollT = setTimeout(() => { const i = Math.round(pbox.scrollLeft / pbox.clientWidth); if(i!==P.cur){ P.playing = true; activate(i); } }, 90); });
-pbox.addEventListener('click', e => { const sl = e.target.closest('.slide'); if(!sl) return; const v = $('video', sl); if(!v) return; if(v.paused) v.play().catch(()=>{}); else v.pause(); });
-$('#p-prev').addEventListener('click', () => scrollToIndex(P.cur-1));
-$('#p-next').addEventListener('click', () => scrollToIndex(P.cur+1));
-document.addEventListener('keydown', e => { if(current!=='player') return; if(e.key==='ArrowRight') scrollToIndex(P.cur+1); if(e.key==='ArrowLeft') scrollToIndex(P.cur-1); if(e.key==='Escape') closePlayer(); });
-function closePlayer(){ P.playing=false; cancelAnimationFrame(P.raf); clearTimeout(P.timer); $$('.slide video', pbox).forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); }); pbox.innerHTML=''; go(P.prev==='camera' ? 'home' : (P.prev||'home')); }
+pbox.addEventListener('click', e => { const sl = e.target.closest('.slide'); if(!sl) return; const k = +sl.dataset.k; if(!P.items[k].url){ toast('demo clips have no sound'); return; } setSound(P.sound===k ? -1 : k); });
+pbox.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' '){ const sl = e.target.closest('.slide'); if(sl){ e.preventDefault(); sl.click(); } } });
+document.addEventListener('keydown', e => { if(current!=='player') return; if(e.key==='ArrowRight') pbox.scrollBy({left:244, behavior:'smooth'}); if(e.key==='ArrowLeft') pbox.scrollBy({left:-244, behavior:'smooth'}); if(e.key==='Escape') closePlayer(); });
+function closePlayer(){ cancelAnimationFrame(P.raf); $$('.slide video', pbox).forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); }); pbox.innerHTML=''; go(P.prev==='camera' ? 'home' : (P.prev||'home')); }
 $('#p-close').addEventListener('click', closePlayer);
-$('#p-replay').addEventListener('click', () => { P.cur = -1; pbox.scrollTo({left:0}); activate(0); });
 let touchY = 0, touchX = 0; $('#s-player').addEventListener('touchstart', e => { touchY = e.touches[0].clientY; touchX = e.touches[0].clientX; }, {passive:true}); $('#s-player').addEventListener('touchend', e => { const dy = e.changedTouches[0].clientY - touchY, dx = Math.abs(e.changedTouches[0].clientX - touchX); if(dy > 90 && dy > dx*1.5) closePlayer(); });
 
 /* ===================== export (stitch on a canvas) ===================== */
 $('#p-export').addEventListener('click', async () => {
   const btn = $('#p-export'); if(btn.disabled) return; btn.disabled = true; btn.textContent = 'stitching…';
-  P.playing=false; cancelAnimationFrame(P.raf); clearTimeout(P.timer); $$('.slide video', pbox).forEach(v => v.pause());
+  $$('.slide video', pbox).forEach(v => v.pause());
   try{
     const blob = await stitch(P.items, pct => { btn.textContent = `stitching ${pct}%`; });
     const room = S.rooms.find(r=>r.id===P.roomId); const ext = (blob.type||'').includes('mp4') ? 'mp4' : 'webm';
@@ -843,6 +824,7 @@ $('#p-export').addEventListener('click', async () => {
     console.log('export ready', blob.type, blob.size, 'bytes'); await offerFile(blob, name); btn.textContent = 'export today\'s log';
   }catch(e){ console.error(e); toast('export failed in this browser'); btn.textContent = 'export today\'s log'; }
   btn.disabled = false;
+  $$('.slide video', pbox).forEach(v => v.play().catch(()=>{}));
 });
 async function offerFile(blob, name){
   let dl = null; try{ if(window.claude && window.claude.use) dl = await window.claude.use('downloads'); }catch(e){ dl = null; }
